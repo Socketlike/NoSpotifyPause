@@ -1,18 +1,18 @@
 {
-  "id": "dev.replugged.PluginTemplate",
-  "name": "Plugin Template",
-  "description": "A plugin template",
+  "id": "lib.evelyn.NoSpotifyPause",
+  "name": "NoSpotifyPause",
+  "description": "A Post-SWC Replugged plugin that stops Discord from pausing your Spotify playback while in VC.",
   "author": {
-    "name": "replugged",
-    "discordID": "1000992611840049192",
-    "github": "replugged-org"
+    "name": "Evelyn",
+    "discordID": "285329659023851520",
+    "github": "Socketlike"
   },
   "version": "1.0.0",
   "updater": {
     "type": "github",
-    "id": "replugged-org/plugin-template"
+    "id": "Socketlike/NoSpotifyPause"
   },
   "license": "MIT",
   "type": "replugged-plugin",
-  "renderer": "src/index.ts"
+  "plaintextPatches": "src/patches.ts"
 }

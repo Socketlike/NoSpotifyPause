@@ -1,15 +1,17 @@
 {
-  "name": "plugin-template",
+  "name": "NoSpotifyPause",
   "version": "1.0.0",
-  "description": "A plugin template",
+  "description": "A Post-SWC Replugged plugin that stops Discord from pausing your Spotify playback while in VC.",
   "engines": {
     "node": ">=18.0.0",
     "pnpm": ">=8.0.0"
   },
   "scripts": {
-    "build": "replugged build plugin",
+    "build:dev": "replugged build plugin",
+    "build:prod": "replugged build plugin --production",
     "watch": "replugged build plugin --watch",
-    "bundle": "replugged bundle plugin",
+    "build:bundle:dev": "replugged bundle plugin",
+    "build:bundle:prod": "replugged bundle plugin --production",
     "check": "tsc --noEmit",
     "prettier:check": "prettier ./src --check",
     "eslint:check": "eslint ./src",
@@ -20,7 +22,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@types/node": "^18.15.11",
     "@typescript-eslint/eslint-plugin": "^5.57.0",

@@ -1,3 +1,4 @@
-# Replugged plugin template
-
-See the [plugin development guide](https://guide.replugged.dev/docs/plugins/getting-started) for more information on using this template.
+<p>
+  <h1 align="center">NoSpotifyPause</h1>
+  <h4 align="center">A Post-SWC Replugged plugin that stops Discord from pausing your Spotify playback while in VC.</h4>
+</p>

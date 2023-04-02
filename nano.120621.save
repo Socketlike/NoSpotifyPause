@@ -1,0 +1,11 @@
+        function v(e, t) {
+            return h.put(e, t, {
+                url: c.C7.PLAYER_PAUSE
+            }).then((function(e) {
+                o.Z.dispatch({
+                    type: "SPOTIFY_PLAYER_PAUSE"
+                });
+                return e
+            }
+            ))
+        }
