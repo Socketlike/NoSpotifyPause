@@ -14,5 +14,6 @@
   },
   "license": "MIT",
   "type": "replugged-plugin",
-  "plaintextPatches": "src/patches.ts"
+  "plaintextPatches": "src/patches.ts",
+  "reloadRequired": true
 }

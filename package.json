@@ -10,8 +10,8 @@
     "build:dev": "replugged build plugin",
     "build:prod": "replugged build plugin --production",
     "watch": "replugged build plugin --watch",
-    "build:bundle:dev": "replugged bundle plugin",
-    "build:bundle:prod": "replugged bundle plugin --production",
+    "build:dev:bundle": "replugged bundle plugin",
+    "build:prod:bundle": "replugged bundle plugin --production",
     "check": "tsc --noEmit",
     "prettier:check": "prettier ./src --check",
     "eslint:check": "eslint ./src",
@@ -25,14 +25,14 @@
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^18.15.11",
-    "@typescript-eslint/eslint-plugin": "^5.57.0",
-    "@typescript-eslint/parser": "^5.57.0",
-    "eslint": "^8.37.0",
+    "@typescript-eslint/eslint-plugin": "^5.58.0",
+    "@typescript-eslint/parser": "^5.58.0",
+    "eslint": "^8.38.0",
     "eslint-config-dmitmel": "github:dmitmel/eslint-config-dmitmel",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-react": "^7.32.2",
     "prettier": "^2.8.7",
-    "replugged": "^4.2.3",
-    "typescript": "^5.0.3"
+    "replugged": "^4.2.6",
+    "typescript": "^5.0.4"
   }
 }

@@ -1,4 +1,4 @@
-import { types, Logger } from 'replugged';
+import { Logger, types } from 'replugged';
 
 const logger = Logger.plugin('NoSpotifyPause');
 
@@ -9,11 +9,11 @@ export default [
       (source) => {
         const watcherFuncKey = source.match(
           /function ([a-zA-Z0-9_]+)\([a-zA-Z0-9_,]+\){.*isCurrentClientInVoiceChannel.*[a-zA-Z0-9_]+\.start\(.*return!1}/,
-        )?.[1] as string;
+        )?.[1];
 
         const autoPauseFuncKey = source.match(
           /function ([a-zA-Z0-9_]+)\(\){.*"Playback auto paused"\)}+/,
-        )?.[1] as string;
+        )?.[1];
 
         if (!watcherFuncKey || !autoPauseFuncKey)
           logger.error('Cannot get VC watcher / auto pause function key');
