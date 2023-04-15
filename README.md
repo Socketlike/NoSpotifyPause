@@ -1,4 +1,4 @@
-<<p>
+<p>
   <h1 align="center">NoSpotifyPause</h1>
 </p>
 
