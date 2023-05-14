@@ -2,29 +2,29 @@ import { Logger, types } from 'replugged';
 
 const logger = Logger.plugin('NoSpotifyPause');
 
+const watcherFunctionMatch =
+  /function ([a-zA-Z0-9_]+)\([a-zA-Z0-9_,]+\){.*isCurrentClientInVoiceChannel.*[a-zA-Z0-9_]+\.start\(.*return!1}/;
+const autoPauseFunctionMatch = /function ([a-zA-Z0-9_]+)\(\){.*"Playback auto paused"\)}+/;
+
 export default [
   {
     find: /"Playback auto paused"/,
     replacements: [
       (source) => {
-        const watcherFuncKey = source.match(
-          /function ([a-zA-Z0-9_]+)\([a-zA-Z0-9_,]+\){.*isCurrentClientInVoiceChannel.*[a-zA-Z0-9_]+\.start\(.*return!1}/,
-        )?.[1];
+        const watcherFunctionKey = source.match(watcherFunctionMatch)?.[1];
 
-        const autoPauseFuncKey = source.match(
-          /function ([a-zA-Z0-9_]+)\(\){.*"Playback auto paused"\)}+/,
-        )?.[1];
+        const autoPauseFunctionKey = source.match(autoPauseFunctionMatch)?.[1];
 
-        if (!watcherFuncKey || !autoPauseFuncKey)
+        if (!watcherFunctionKey || !autoPauseFunctionKey)
           logger.error('Cannot get VC watcher / auto pause function key');
         else {
           // Replace VC watcher calls in any function in the SpotifyStore class with nothing
           source = source.replace(
-            new RegExp(`return ${watcherFuncKey}\\([a-zA-Z0-9.,_()]+\\)`, 'g'),
+            new RegExp(`return ${watcherFunctionKey}\\([a-zA-Z0-9.,_()]+\\)`, 'g'),
             'return !0',
           );
           source = source.replace(
-            new RegExp(`${watcherFuncKey}\\([a-zA-Z0-9.,_()]+\\);`, 'g'),
+            new RegExp(`${watcherFunctionKey}\\([a-zA-Z0-9.,_()]+\\);`, 'g'),
             '(void 0);',
           );
 
@@ -34,7 +34,7 @@ export default [
           // Remove any setTimeout calls that calls the auto pause function
           source = source.replace(
             new RegExp(
-              `([=()a-zA-Z0-9,_.]+)\\.start\\([a-zA-Z0-9,_.\\s()]+${autoPauseFuncKey}(,!1|)\\)`,
+              `([=()a-zA-Z0-9,_.]+)\\.start\\([a-zA-Z0-9,_.\\s()]+${autoPauseFunctionKey}(,!1|)\\)`,
               'g',
             ),
             '$1',
@@ -44,7 +44,11 @@ export default [
         return source;
       },
       {
-        match: /function ([a-zA-Z0-9_]+)\(\){.*"Playback auto paused"\)}+/,
+        match: autoPauseFunctionMatch,
+        replace: 'function $1(){}',
+      },
+      {
+        match: watcherFunctionMatch,
         replace: 'function $1(){}',
       },
       /*

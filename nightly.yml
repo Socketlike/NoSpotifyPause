@@ -1,0 +1,61 @@
+name: Release (Dev/Nightly)
+
+on:
+  workflow_dispatch:
+    inputs: null
+  push:
+    paths:
+      - src/**/*.ts
+      - src/**/*.tsx
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Get current date
+        id: date
+        run: echo date=\"$(date +"%D at %r")\" >> $GITHUB_OUTPUT
+
+      - name: Check out Git repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - uses: pnpm/action-setup@master
+        with:
+          version: latest
+
+      - name: Install Node.js dependencies
+        run: pnpm install
+
+      - name: Patch version manifest
+        run: sed -i -E 's/"([0-9]+)\.([0-9]+)\.([0-9]+)"/"\1\.\2\.\3-nightly"/' manifest.json
+
+      - name: Build TypeScript and bundle into asar
+        run: pnpm run build:dev:bundle
+
+      - name: Clear latest nightly release
+        uses: dev-drprasad/delete-tag-and-release@master
+        with:
+          tag_name: nightly
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: ncipollo/release-action@main
+        with:
+          artifacts: 'bundle/*'
+          makeLatest: true
+          allowUpdates: true
+          tag: nightly
+          body: 'Generated on `${{ steps.date.outputs.date }}`'
+          name: nightly
+          generateReleaseNotes: true
+          replacesArtifacts: true
+          prerelease: true
