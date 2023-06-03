@@ -9,8 +9,8 @@
   },
   "version": "1.0.1",
   "updater": {
-    "type": "github",
-    "id": "Socketlike/NoSpotifyPause"
+    "type": "store",
+    "id": "lib.evelyn.NoSpotifyPause"
   },
   "license": "MIT",
   "type": "replugged-plugin",
