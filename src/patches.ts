@@ -3,8 +3,8 @@ import { Logger, types } from 'replugged';
 const logger = Logger.plugin('NoSpotifyPause');
 
 const watcherFunctionMatch =
-  /function ([a-zA-Z0-9_]+)\([a-zA-Z0-9_,]+\){.*isCurrentClientInVoiceChannel.*[a-zA-Z0-9_]+\.start\(.*return!1}/;
-const autoPauseFunctionMatch = /function ([a-zA-Z0-9_]+)\(\){.*"Playback auto paused"\)}+/;
+  /function (.{1,3})\((.{1,3})\){(.+isCurrentClientInVoiceChannel\(\))/;
+const autoPauseFunctionMatch = /function (.{1,3})\(\){.*"Playback auto paused"\)}+/;
 
 export default [
   {
@@ -49,7 +49,7 @@ export default [
       },
       {
         match: watcherFunctionMatch,
-        replace: 'function $1(){}',
+        replace: 'function $1($2){return !1;$3',
       },
       /*
         The plaintext patch in the comment below replaces the entire mess above, with only one downside:
