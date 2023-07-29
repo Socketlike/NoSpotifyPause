@@ -2,8 +2,7 @@ import { Logger, types } from 'replugged';
 
 const logger = Logger.plugin('NoSpotifyPause');
 
-const watcherFunctionMatch =
-  /function (.{1,3})\((.{1,3})\){(.+isCurrentClientInVoiceChannel\(\))/;
+const watcherFunctionMatch = /function (.{1,3})\((.{1,3})\){(.+isCurrentClientInVoiceChannel\(\))/;
 const autoPauseFunctionMatch = /function (.{1,3})\(\){.*"Playback auto paused"\)}+/;
 
 export default [
