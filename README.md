@@ -24,3 +24,6 @@
   A Post-SWC Replugged plugin that stops Discord from pausing your Spotify playback while in VC.<br>
   <sub><sup>I'm very sorry for the plaintext patches' quality</sup></sub>
 </p>
+
+> **Warning**
+> This plugin has moved to [**Socketlike/replugged-plugins**](https://github.com/Socketlike/replugged-plugins)
